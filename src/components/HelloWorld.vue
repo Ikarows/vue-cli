@@ -1,5 +1,11 @@
 <template>
   <div class="hello">
+    <p>{{todo.hitokoto}}</p>
+    <p>{{todo.author}}</p>
+    <p>{{todo.source}}</p>
+    <p>{{todo.date}}</p>
+    <p>{{todo.catname}}</p>
+    <p>{{todo.id}}</p>
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
@@ -81,21 +87,40 @@
       </li>
     </ul>
   </div>
+
 </template>
 
 <script>
 export default {
   name: 'HelloWorld',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+    data () {
+        return {
+          msg: "",
+        }
+    },
+    mounted: function () {
+        //this.msg = this.todo;
+        let params = {
+            cat: "",
+            charset: "utf-8",
+            length: "50",
+            encode: "json",
+            fun: "sync",
+            source: "",
+        }
+        this.$store.dispatch('getData', params);
+    },
+    computed: {
+        todo () {
+            return this.$store.state.user.todo;
+        }
     }
-  }
+
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="less">
+<style scoped>
 h1, h2 {
   font-weight: normal;
 }

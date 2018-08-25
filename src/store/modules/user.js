@@ -3,7 +3,7 @@ import api from '@/api'
 
 export default {
 	state: {
-		todo: 'this is vuex data'
+		todo: []
 	},
 	mutations: {
 		settodo (state, item) {
@@ -11,14 +11,13 @@ export default {
 		}
 	},
 	actions: {
-		getData (store, msg) {
-			axios.get(api.getData(msg)).then(function(data){
-				console.log(data.data.result);
-				store.commit('settodo', data.data.result);
+		getData (store, params) {
+			axios.get(api.getData, {params:params}).then(data => {
+				console.log(data)
+				store.commit('settodo', data.data);
 			}).catch((err) => {
 				console.log(err);
 			})
 		}
-	},
-	modules: {}
+	}
 }

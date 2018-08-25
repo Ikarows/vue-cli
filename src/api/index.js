@@ -2,10 +2,9 @@
  * api 接口地址
  *
  */
-
-const _baseUrl = '';
+//https://api.imjad.cn/hitokoto.md
+const _base = 'https://api.imjad.cn';
 
 export default {
-
-	getData (msg) { return _baseUrl;}
+	getData : _base + '/hitokoto/'
 }
