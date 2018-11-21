@@ -92,36 +92,36 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
-    data () {
-        return {
-          msg: "",
-        }
-    },
-    mounted: function () {
-        //this.msg = this.todo;
-        let params = {
-            cat: "",
-            charset: "utf-8",
-            length: "50",
-            encode: "json",
-            fun: "sync",
-            source: "",
-        }
-        this.$store.dispatch('getData', params);
-    },
-    computed: {
-        todo () {
-            return this.$store.state.user.todo;
-        }
+  name: "HelloWorld",
+  data() {
+    return {
+      msg: ""
+    };
+  },
+  mounted: function() {
+    //this.msg = this.todo;
+    let params = {
+      cat: "",
+      charset: "utf-8",
+      length: "50",
+      encode: "json",
+      fun: "sync",
+      source: ""
+    };
+    this.$store.dispatch("getData", params);
+  },
+  computed: {
+    todo() {
+      return this.$store.state.user.todo;
     }
-
-}
+  }
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 ul {

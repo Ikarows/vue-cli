@@ -1,23 +1,22 @@
-import axios from "axios"
-import api from '@/api'
+import api from '@/resources/index'
 
 export default {
-	state: {
-		todo: []
-	},
-	mutations: {
-		settodo (state, item) {
-			state.todo = item;
-		}
-	},
-	actions: {
-		getData (store, params) {
-			axios.get(api.getData, {params:params}).then(data => {
-				console.log(data)
-				store.commit('settodo', data.data);
-			}).catch((err) => {
-				console.log(err);
-			})
-		}
-	}
+  state: {
+    todo: []
+  },
+  mutations: {
+    setTodo(state, item) {
+      state.todo = item;
+    }
+  },
+  actions: {
+    getData(store, params) {
+      api.getData(params).then((res) => {
+        console.log(res)
+        store.commit('setTodo', res.data);
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
+  }
 }
