@@ -13,7 +13,7 @@ router.beforeEach((to, from, next) => {
 	// 判断该路由是否需要登录权限
 	if (to.meta.requireAuth) {  
 		// 通过vuex state获取当前的token是否存在
-        if (sessionStorage.token) {
+        if (localStorage.token) {
             next();
         }else {
             next({
@@ -31,9 +31,9 @@ router.beforeEach((to, from, next) => {
 // http request 拦截器
 axios.interceptors.request.use((config) => {
 	// 判断是否存在token，如果存在的话，则每个http header都加上token
-	if (sessionStorage.token) {  
-		config.headers.common['Authorization'] = sessionStorage.token;
-		config.headers.common['Auth-Token'] = sessionStorage.token;
+	if (localStorage.token) {
+		config.headers.common['Authorization'] = localStorage.token;
+		config.headers.common['Auth-Token'] = localStorage.token;
 	}
 	return config;
 },(err) => {
