@@ -91,6 +91,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: "HelloWorld",
   data() {
@@ -111,9 +112,9 @@ export default {
     this.$store.dispatch("getData", params);
   },
   computed: {
-    todo() {
-      return this.$store.state.user.todo;
-    }
+    ...mapState({
+		  todo: state => state.user.todo
+	  })
   }
 };
 </script>
