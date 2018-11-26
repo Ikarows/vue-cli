@@ -49,7 +49,7 @@ axios.interceptors.response.use((response) => {
 			case 401:
 				// 返回 401 清除token信息并跳转到登录页面
 				//store.commit(types.LOGOUT);
-				sessionStorage.removeItem("token");
+				localStorage.removeItem("token");
 				router.replace({
 					path: 'login',
 					query: {redirect: router.currentRoute.fullPath}
