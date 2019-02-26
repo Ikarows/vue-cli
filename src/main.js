@@ -42,7 +42,7 @@ axios.interceptors.request.use((config) => {
 
 // http response 拦截器
 axios.interceptors.response.use((response) => {
-	return response;
+	return response.data;
 },(error) => {
 	if (error.response) {
 		switch (error.response.status) {
