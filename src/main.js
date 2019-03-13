@@ -50,10 +50,10 @@ axios.interceptors.response.use((response) => {
 				// 返回 401 清除token信息并跳转到登录页面
 				//store.commit(types.LOGOUT);
 				localStorage.removeItem("token");
-				router.replace({
-					path: 'login',
-					query: {redirect: router.currentRoute.fullPath}
-				})
+				// router.replace({
+				// 	path: 'login',
+				// 	query: {redirect: router.currentRoute.fullPath}
+				// })
 		}
 	}
 	// 返回接口返回的错误信息

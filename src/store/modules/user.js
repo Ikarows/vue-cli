@@ -1,4 +1,4 @@
-import api from '@/resources/index'
+import api from '@/api'
 
 export default {
 	namespaced: true, //带命名空间的模块
@@ -13,8 +13,8 @@ export default {
 	actions: {
 		getData(store, params) {
 			api.getData(params).then((res) => {
-				console.log(res)
-				store.commit('setTodo', res.data);
+				console.log("res", res)
+				store.commit('setTodo', res);
 			}).catch((err) => {
 				console.log(err);
 			});
