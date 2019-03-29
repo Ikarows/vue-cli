@@ -5,15 +5,30 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 
+//使用 Mint
+import 'mint-ui/lib/style.css'
+import Mint from 'mint-ui';
+Vue.use(Mint);
+
+//使用 ElementUI
+/*import 'element-ui/lib/theme-chalk/index.css';
+import ElementUI from 'element-ui';
+Vue.use(ElementUI);*/
+
 //取消 vue 在启动时生成生产提示
 Vue.config.productionTip = false;
 
 //路由拦截器
 router.beforeEach((to, from, next) => {
+	//存储token
+	if(to.query.token){
+		sessionStorage.token = to.query.token;
+	}
+
 	// 判断该路由是否需要登录权限
 	if (to.meta.requireAuth) {  
 		// 通过vuex state获取当前的token是否存在
-        if (localStorage.token) {
+        if (sessionStorage.token) {
             next();
         }else {
             next({
@@ -31,9 +46,9 @@ router.beforeEach((to, from, next) => {
 // http request 拦截器
 axios.interceptors.request.use((config) => {
 	// 判断是否存在token，如果存在的话，则每个http header都加上token
-	if (localStorage.token) {
-		config.headers.common['Authorization'] = localStorage.token;
-		config.headers.common['Auth-Token'] = localStorage.token;
+	if (sessionStorage.token) {
+		config.headers.common['Authorization'] = sessionStorage.token;
+		config.headers.common['Auth-Token'] = sessionStorage.token;
 	}
 	return config;
 },(err) => {
@@ -49,7 +64,7 @@ axios.interceptors.response.use((response) => {
 			case 401:
 				// 返回 401 清除token信息并跳转到登录页面
 				//store.commit(types.LOGOUT);
-				localStorage.removeItem("token");
+				sessionStorage.removeItem("token");
 				// router.replace({
 				// 	path: 'login',
 				// 	query: {redirect: router.currentRoute.fullPath}
@@ -57,7 +72,7 @@ axios.interceptors.response.use((response) => {
 		}
 	}
 	// 返回接口返回的错误信息
-	return Promise.reject(error.response.data)   
+	return Promise.reject(error.response.data)
 })
 
 new Vue({
