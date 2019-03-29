@@ -4,6 +4,11 @@ import App from './App'
 import router from './router'
 import store from './store'
 import axios from 'axios'
+import 'normalize.css'
+
+//解决ios click 300ms延迟
+import fastclick from 'fastclick'
+fastclick.attach(document.body)
 
 //使用 Mint
 import 'mint-ui/lib/style.css'
