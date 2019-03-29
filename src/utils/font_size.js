@@ -17,4 +17,4 @@ let setFontSize = () => {
         window.addEventListener("resize",function(){_self.changePage();},false);
 }
 
-export default setFontSize;
+export default setFontSize();
