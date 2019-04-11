@@ -4,6 +4,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import axios from 'axios'
+import config from './config'
 import 'normalize.css'
 
 //解决ios click 300ms延迟
@@ -47,6 +48,8 @@ router.beforeEach((to, from, next) => {
         next();
     }
 })
+
+axios.defaults.baseURL = config.base.host;
 
 // http request 拦截器
 axios.interceptors.request.use((config) => {
