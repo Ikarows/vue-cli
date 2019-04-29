@@ -2,11 +2,10 @@ import dev from '@/config/dev.env'
 import prod from '@/config/prod.env'
 let config = null;
 
-//区分测试环境和正式环境
-if( /^baidu.com/.test(window.location.host) ) {
-    config = prod
-}else {
-    config = dev
+if (process.env.NODE_ENV == 'development') {
+  config = prod//开发环境请求地址
+} else if (process.env.NODE_ENV == 'production') {
+  config = dev//生产环境请求地址
 }
 
 export default config;
